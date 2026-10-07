@@ -58,10 +58,7 @@ if storage_choice == '2':
 if storage_choice != '2':
     print("\n      🌐 Connecting to Kaggle API to fetch authoritative dataset...")
     try:
-        os.environ['KAGGLE_USERNAME'] = "S.Meenatchi Sundaram"
-        os.environ['KAGGLE_KEY'] = "KGAT_31f3e5d0ded70ba1ab2e40bebb5528b1"
         import kaggle
-        # Requires kaggle.json in ~/.kaggle/ directory
         kaggle.api.authenticate() 
         print("      ⏳ Downloading 'mlg-ulb/creditcardfraud' (This may take a moment)...")
         kaggle.api.dataset_download_files('mlg-ulb/creditcardfraud', path='.', unzip=True)
