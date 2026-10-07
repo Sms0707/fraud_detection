@@ -6,10 +6,7 @@ import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier, IsolationForest
 from sklearn.metrics import average_precision_score, precision_recall_curve, precision_score
 from scipy.stats import ks_2samp
-from dotenv import load_dotenv
-load_dotenv()
 
-# Clear screen for a clean presentation look
 os.system('cls' if os.name == 'nt' else 'clear')
 
 print("=" * 75)
@@ -60,6 +57,8 @@ if storage_choice == '2':
 if storage_choice != '2':
     print("\n      🌐 Connecting to Kaggle API to fetch authoritative dataset...")
     try:
+        os.environ['KAGGLE_USERNAME'] = "S.Meenatchi Sundaram"
+        os.environ['KAGGLE_KEY'] = "KGAT_31f3e5d0ded70ba1ab2e40bebb5528b1"
         import kaggle
         kaggle.api.authenticate() 
         print("      ⏳ Downloading 'mlg-ulb/creditcardfraud' (This may take a moment)...")
@@ -83,7 +82,6 @@ print("\n[3/6] 🔄 Fetching active dataset live from Cloud S3 Data Lake...")
 s3_client.download_file(bucket_name, s3_key, "active_pipeline_data.csv")
 active_df = pd.read_csv("active_pipeline_data.csv")
 
-# Separate features and target label (assuming target column is named 'Class' or 'target')
 target_column = 'Class' if 'Class' in active_df.columns else active_df.columns[-1]
 X_train = active_df.drop(columns=[target_column]).select_dtypes(include=[np.number]).values
 y_train = active_df[target_column].values
@@ -126,7 +124,6 @@ for th in thresholds:
 
 optimal_threshold = thresholds[np.argmin(costs)] if len(thresholds) > 0 else 0.5
 
-# KS-Test Concept Drift Simulation
 X_drifted_batch = np.random.normal(loc=1.2, scale=1.5, size=(min(2000, len(X_train)), X_train.shape[1]))
 ks_stat, p_value = ks_2samp(X_train[:, 0], X_drifted_batch[:, 0])
 
