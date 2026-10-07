@@ -6,6 +6,8 @@ import pandas as pd
 from sklearn.ensemble import HistGradientBoostingClassifier, IsolationForest
 from sklearn.metrics import average_precision_score, precision_recall_curve, precision_score
 from scipy.stats import ks_2samp
+from dotenv import load_dotenv
+load_dotenv()
 
 # Clear screen for a clean presentation look
 os.system('cls' if os.name == 'nt' else 'clear')
