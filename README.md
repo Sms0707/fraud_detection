@@ -66,12 +66,14 @@ Set them as environment variables in your terminal before running the script, or
 Windows (Command Prompt):
 
 set KAGGLE_USERNAME=your_username
+
 set KAGGLE_KEY=your_api_key
 
 
 Mac/Linux:
 
 export KAGGLE_USERNAME="your_username"
+
 export KAGGLE_KEY="your_api_key"
 
 
